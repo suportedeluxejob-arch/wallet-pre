@@ -6,6 +6,10 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  // Optimize for Netlify Edge Functions
+  experimental: {
+    reactCompiler: false,
+  },
 }
 
 export default nextConfig

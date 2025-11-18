@@ -1,0 +1,18 @@
+# Netlify configuration for Next.js 16
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+# Configure environment for Next.js builds
+[build.environment]
+  NODE_VERSION = "20.9.0"
+
+# Use the Netlify Next.js plugin for compatibility
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+# Rewrite rules for Next.js routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
