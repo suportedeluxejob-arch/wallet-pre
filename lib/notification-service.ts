@@ -35,13 +35,22 @@ class NotificationService {
     stakeRewards: true,
     sound: true,
   }
+  private initialized = false
 
   constructor() {
+    // This prevents SSR errors during Next.js prerendering
+  }
+
+  private ensureInitialized() {
+    if (this.initialized || typeof window === 'undefined') return
+    
+    this.initialized = true
     this.loadNotifications()
     this.loadSettings()
   }
 
   private loadNotifications() {
+    if (typeof window === 'undefined') return
     const stored = localStorage.getItem('solary_notifications')
     if (stored) {
       this.notifications = JSON.parse(stored)
@@ -49,11 +58,13 @@ class NotificationService {
   }
 
   private saveNotifications() {
+    if (typeof window === 'undefined') return
     localStorage.setItem('solary_notifications', JSON.stringify(this.notifications))
     this.notifyListeners()
   }
 
   private loadSettings() {
+    if (typeof window === 'undefined') return
     const stored = localStorage.getItem('solary_notification_settings')
     if (stored) {
       this.settings = JSON.parse(stored)
@@ -61,6 +72,7 @@ class NotificationService {
   }
 
   private saveSettings() {
+    if (typeof window === 'undefined') return
     localStorage.setItem('solary_notification_settings', JSON.stringify(this.settings))
   }
 
@@ -69,21 +81,25 @@ class NotificationService {
   }
 
   subscribe(listener: (notifications: Notification[]) => void) {
+    this.ensureInitialized()
     this.listeners.add(listener)
     listener(this.notifications)
     return () => this.listeners.delete(listener)
   }
 
   getSettings(): NotificationSettings {
+    this.ensureInitialized()
     return { ...this.settings }
   }
 
   updateSettings(newSettings: Partial<NotificationSettings>) {
+    this.ensureInitialized()
     this.settings = { ...this.settings, ...newSettings }
     this.saveSettings()
   }
 
   add(notification: Omit<Notification, 'id' | 'timestamp' | 'read'>) {
+    this.ensureInitialized()
     if (!this.settings.enabled) return
 
     const newNotification: Notification = {
