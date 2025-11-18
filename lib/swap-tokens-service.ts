@@ -38,25 +38,35 @@ export const EXPANDED_SWAP_TOKENS: SwapToken[] = [
 class SwapTokensService {
   private favorites: string[] = []
   private favoritesKey = 'solary_swap_token_favorites'
+  private isInitialized = false
 
   constructor() {
-    this.loadFavorites()
+    // This prevents SSR errors since localStorage is undefined on the server
   }
 
-  private loadFavorites() {
-    const stored = localStorage.getItem(this.favoritesKey)
-    if (stored) {
-      try {
+  private ensureInitialized() {
+    if (this.isInitialized) return
+    if (typeof window === 'undefined') return // Guard against SSR
+
+    try {
+      const stored = localStorage.getItem(this.favoritesKey)
+      if (stored) {
         this.favorites = JSON.parse(stored)
-      } catch (error) {
-        console.error('Error loading favorites:', error)
-        this.favorites = []
       }
+    } catch (error) {
+      console.error('Error loading favorites:', error)
+      this.favorites = []
     }
+    this.isInitialized = true
   }
 
   private saveFavorites() {
-    localStorage.setItem(this.favoritesKey, JSON.stringify(this.favorites))
+    if (typeof window === 'undefined') return // Guard against SSR
+    try {
+      localStorage.setItem(this.favoritesKey, JSON.stringify(this.favorites))
+    } catch (error) {
+      console.error('Error saving favorites:', error)
+    }
   }
 
   getPopularTokens(): SwapToken[] {
@@ -78,6 +88,7 @@ class SwapTokensService {
   }
 
   addFavorite(mint: string) {
+    this.ensureInitialized()
     if (!this.favorites.includes(mint)) {
       this.favorites.push(mint)
       this.saveFavorites()
@@ -85,15 +96,18 @@ class SwapTokensService {
   }
 
   removeFavorite(mint: string) {
+    this.ensureInitialized()
     this.favorites = this.favorites.filter((m) => m !== mint)
     this.saveFavorites()
   }
 
   isFavorite(mint: string): boolean {
+    this.ensureInitialized()
     return this.favorites.includes(mint)
   }
 
   getFavorites(): SwapToken[] {
+    this.ensureInitialized()
     return this.favorites
       .map((mint) => this.getTokenByMint(mint))
       .filter((token) => token !== undefined) as SwapToken[]
