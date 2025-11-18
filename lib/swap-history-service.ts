@@ -21,9 +21,13 @@ export interface SwapHistoryEntry {
 class SwapHistoryService {
   private historyKey = 'solary_swap_history'
   private listeners: Set<(history: SwapHistoryEntry[]) => void> = new Set()
+  private initialized = false
 
   constructor() {
-    this.loadHistory()
+    if (typeof window !== 'undefined' && !this.initialized) {
+      this.loadHistory()
+      this.initialized = true
+    }
   }
 
   private loadHistory() {

@@ -19,7 +19,6 @@ export default function Home() {
 
   useAutoLock(handleAutoLock)
 
-  // Check if wallet exists on mount
   useEffect(() => {
     const hasWallet = localStorage.getItem('solary_wallet')
     if (hasWallet) {
