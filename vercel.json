@@ -1,0 +1,30 @@
+{
+  "name": "solary-wallet-v8",
+  "version": "8.0.0",
+  "description": "The cheapest Solana wallet with advanced features",
+  "buildCommand": "npm run build",
+  "devCommand": "npm run dev",
+  "env": {
+    "NEXT_PUBLIC_SOLANA_RPC": {
+      "description": "Solana RPC endpoint",
+      "default": "https://api.mainnet-beta.solana.com"
+    },
+    "NEXT_PUBLIC_SOLARY_FEE_WALLET": {
+      "description": "Solary fee collection wallet",
+      "default": "2gNsFkvySmj3JVuabfy6W9u8sbyLbqePp7wgGeFaxr46"
+    }
+  },
+  "functions": {
+    "api/**/*.ts": {
+      "memory": 512,
+      "maxDuration": 30
+    }
+  },
+  "framework": "nextjs",
+  "regions": ["iad1"],
+  "public": true,
+  "github": {
+    "enabled": true,
+    "protected": true
+  }
+}

@@ -1,0 +1,187 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Default: Solary Wallet premium dark theme */
+  --background: #0b0b0b;
+  --foreground: #f8e1f4;
+  --card: #1a0a14;
+  --card-foreground: #f8e1f4;
+  --popover: #1a0a14;
+  --popover-foreground: #f8e1f4;
+  --primary: #8b005d;
+  --primary-foreground: #f8e1f4;
+  --secondary: #2a1a24;
+  --secondary-foreground: #f8e1f4;
+  --muted: #3a2a34;
+  --muted-foreground: #c0c0c0;
+  --accent: #d4308e;
+  --accent-foreground: #f8e1f4;
+  --destructive: #dc2626;
+  --destructive-foreground: #f8e1f4;
+  --border: #3a2a34;
+  --input: #1a0a14;
+  --ring: #8b005d;
+  --chart-1: #8b005d;
+  --chart-2: #a0215d;
+  --chart-3: #b0415d;
+  --chart-4: #c0615d;
+  --chart-5: #d0815d;
+  --radius: 1rem;
+  --sidebar: #1a0a14;
+  --sidebar-foreground: #f8e1f4;
+  --sidebar-primary: #8b005d;
+  --sidebar-primary-foreground: #f8e1f4;
+  --sidebar-accent: #2a1a24;
+  --sidebar-accent-foreground: #f8e1f4;
+  --sidebar-border: #3a2a34;
+  --sidebar-ring: #8b005d;
+}
+
+/* Add light theme support */
+.light {
+  --background: #ffffff;
+  --foreground: #1a0a14;
+  --card: #fef7fc;
+  --card-foreground: #1a0a14;
+  --popover: #ffffff;
+  --popover-foreground: #1a0a14;
+  --primary: #8b005d;
+  --primary-foreground: #ffffff;
+  --secondary: #f5e6f0;
+  --secondary-foreground: #1a0a14;
+  --muted: #e5d4e0;
+  --muted-foreground: #6b4a5e;
+  --accent: #d4308e;
+  --accent-foreground: #ffffff;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --border: #e5d4e0;
+  --input: #fef7fc;
+  --ring: #8b005d;
+  --chart-1: #8b005d;
+  --chart-2: #a0215d;
+  --chart-3: #b0415d;
+  --chart-4: #c0615d;
+  --chart-5: #d0815d;
+  --sidebar: #fef7fc;
+  --sidebar-foreground: #1a0a14;
+  --sidebar-primary: #8b005d;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f5e6f0;
+  --sidebar-accent-foreground: #1a0a14;
+  --sidebar-border: #e5d4e0;
+  --sidebar-ring: #8b005d;
+}
+
+.dark {
+  --background: #0b0b0b;
+  --foreground: #f8e1f4;
+  --card: #1a0a14;
+  --card-foreground: #f8e1f4;
+  --popover: #1a0a14;
+  --popover-foreground: #f8e1f4;
+  --primary: #8b005d;
+  --primary-foreground: #f8e1f4;
+  --secondary: #2a1a24;
+  --secondary-foreground: #f8e1f4;
+  --muted: #3a2a34;
+  --muted-foreground: #c0c0c0;
+  --accent: #d4308e;
+  --accent-foreground: #f8e1f4;
+  --destructive: #dc2626;
+  --destructive-foreground: #f8e1f4;
+  --border: #3a2a34;
+  --input: #1a0a14;
+  --ring: #8b005d;
+  --chart-1: #8b005d;
+  --chart-2: #a0215d;
+  --chart-3: #b0415d;
+  --chart-4: #c0615d;
+  --chart-5: #d0815d;
+  --sidebar: #1a0a14;
+  --sidebar-foreground: #f8e1f4;
+  --sidebar-primary: #8b005d;
+  --sidebar-primary-foreground: #f8e1f4;
+  --sidebar-accent: #2a1a24;
+  --sidebar-accent-foreground: #f8e1f4;
+  --sidebar-border: #3a2a34;
+  --sidebar-ring: #8b005d;
+}
+
+@theme inline {
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'Courier New', monospace;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', system-ui, sans-serif;
+    font-weight: 700;
+  }
+}
+
+@layer utilities {
+  .glow-primary {
+    box-shadow: 0 0 30px rgba(139, 0, 93, 0.5);
+  }
+  
+  .glow-primary-hover {
+    transition: box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .glow-primary-hover:hover {
+    box-shadow: 0 0 30px rgba(139, 0, 93, 0.7);
+  }
+  
+  .glass-effect {
+    background: rgba(26, 10, 20, 0.8);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(139, 0, 93, 0.2);
+  }
+}
